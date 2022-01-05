@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+
+  <script>
+
+    let div =  document.querySelector('#app');
+    let viewModel = {};
+
+    /*//Object.defineProperty -> 객체의 동작을 재정의하는 api (동작을 다시 바꿀 수 있다)
+
+      Object.defineProperty(대상 객체, 객체의 속성, { 
+      get: function(){
+        console.log('접근');
+      },
+      // set -> 속성에 값을 할당했을 때의 동작을 정의
+      set: function(newValue){
+        console.log('할당', newValue);
+        div.innerHTML = newValue;
+      }
+      })
+      ===========================
+      console창에 vieModel.str을 치면 viewModel.str에 접근하게 되면서(get) '접근'이 출력되고
+      viewModel.str = 10 <- 이런식으로 값을 지정하면 값이 할당 되면서(set) '할당 10'이 나타나 값이 10이 된다.
+      Object.defineProperty를 이용해 값을 재정의 할 수 있는 상태임으로
+      set: 안에 div.innerHTML = newValue; 을 넣어 div안에 바뀐 값들이 출력되게 해준다.
+      이게 데이터 바인딩이다.
+    */
+    (function(){
+      function init(){
+        Object.defineProperty(viewModel, 'str', {
+          // get -> 속성에 접근했을 때의 동작을 정의
+          get: function(){
+            console.log('접근');
+          },
+          // set -> 속성에 값을 할당했을 때의 동작을 정의
+          set: function(newValue){
+            console.log('할당', newValue);
+            render(newValue);
+          }
+        });
+      }
+      function render(value){
+        div.innerHTML = value;
+      }//newValue의 값이 value값으로 할당 되면서 value에 newValue의 값이 들어온다.
+
+      init();
+    })();
+    
+    
+  </script>
+</body>
+</html>

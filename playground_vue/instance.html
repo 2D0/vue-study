@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    /*
+    뷰 인스턴스 : 뷰로 개발할 때 필수로 생성해야하는 코드 -> new Vue();
+    let vm = new Vue();
+    위의 코드를 입력 후 console창에 vm을 치면 vue에서 사용할 수 있는 속성과 api(기능)들이 나온다.
+     */
+    let options = {
+      
+    }
+    let vm = new Vue({
+      el: '#app', 
+      data:{
+        message: 'hi'
+      },
+      methods:{
+
+      },
+    });
+    /* 
+    el -> 엘리먼트의 약자
+    body태그 안에서 app 이름을 가진 태그를 찾아 인스턴트 붙이는 의미
+    el을 정의하지 않으면 data값을 아무리 입력해도 data값을 사용할 수 없다.
+    */
+  </script>
+</body>
+</html>

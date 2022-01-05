@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+  </div>
+
+  <script>
+    let div = document.querySelector('#app'); //querySelector는 아이디 값을 입력하면 해당 태그 전체를 불러온다.
+    let str = 'hello wold'
+    div.innerHTML = str; //innerHTML 는 내가 선택한 셀렉터 안에 원하는 내용을 넣을 수 있다. 
+                                  //단 원래 있는 내용 전체가 바뀌니 주의할 것
+    str = 'hello wold!!';
+    div.innerHTML = str;
+
+    
+  </script>
+</body>
+</html>
