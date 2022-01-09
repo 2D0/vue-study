@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>event emit</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{ num }}</p>
+    <!-- <app_header v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위 컴포넌트의 메서드 이름"></app_header> -->
+    <app_header v-on:pass="logText"></app_header>
+    <app_content v-on:increase="increaseNumber"></app_content>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- 뷰 쓸 거면 이거 꼭 붙여야 함 -->
+  <script>
+    let appHeader = {
+      template: '<button v-on:click="passEvent">Click me</button>',
+      methods: {
+        passEvent: function(){
+          this.$emit('pass');
+        }
+      }
+    }
+    let appContent = {
+      template: '<button v-on:click="addNumber">add</button>',
+      methods: {
+        addNumber: function(){
+          this.$emit('increase');
+        }
+      }
+    }
+
+    new Vue({
+      el: '#app',
+      components: {
+        'app_header' : appHeader,
+        'app_content' : appContent
+      },
+      methods: {
+        logText: function(){
+          console.log('hi');
+        },
+        increaseNumber: function(){
+          this.num = this.num + 1
+        }
+      },
+      data: {
+        num: 10
+      }
+    });
+  </script>
+  
+</body>
+</html>

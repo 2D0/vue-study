@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>component</title>
+</head>
+<body>
+  <div id="app">
+    <app_header></app_header>
+    <app_footer></app_footer>
+  </div>
+  
+  <div id="app2">
+    <app_header></app_header>
+    <app_footer></app_footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- 뷰 쓸 거면 이거 꼭 붙여야 함 -->
+  <script>
+    //Vue.component('컴포넌트 이름', 컴포넌트 내용); 
+    //컴포넌트를 등록하는 코드 컴포넌트 이름을 태그로 쓸 수 있고 그 태그를 쓰면 컴포넌트의 내용이 들어감
+
+    //전역 컴포넌트(실제 서비스에서는 쓸 일이 잘 없음)
+    Vue.component('app_header', {
+      template: '<h1>Header</h1>'
+    });
+    Vue.component('app_content', {
+      template: '<div>content</div>'
+    });
+    
+    new Vue({
+      el: '#app',
+
+      //지역 컴포넌트 쓰는 방식 ↓ 참고로 component 아니고 component's' 임 컴포넌트 뒤에 s 붙여야 함(복수형)
+      components: {
+        //'키':'값' 위에 있는 전역 컴포넌트와 같음
+        'app_footer': {
+          template: '<footer>footer</footer>'
+        }
+      },
+    });
+
+    //인스턴트는 여러개를 생성할 수 있음
+    new Vue({
+      el: '#app2',
+      components: {
+        'app_footer': {
+          template: '<footer>footer</footer>'
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+
+<!--
+{} <- 객체를 열었다 표현하고 정확한 명칭은 객체 리터럴이라고 한다.
+
+보통 지역 컴포넌트를 사용하고 따로 사용해야 하는 경우만 전역 컴포넌트를 쓴다.
+
+전역 컴포넌트를 쓰면 인스턴트마다 따로 등록하지 않아도 전체적으로 등록이 되지만
+지역 컴포넌트를 쓰게 되면 인스턴트마다 등록을 해줘야 한다.
+
+컴포넌트간의 데이터 전달과 통신 방법은 'Props'속성과(데이터 전달) 'Event'에밋이다.
+-->
