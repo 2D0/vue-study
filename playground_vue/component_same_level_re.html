@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>component same level re</title>
+</head>
+<body>
+
+  <div id="app">
+    <app-header v-bind:change="msg"></app-header>
+    <app-content v-on:here="msgChange"></app-content>
+    <p>{{ msg }}</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- 뷰 쓸 거면 이거 꼭 붙여야 함 -->
+  <script>
+    let appHeader = {
+      template: '<div>header</div>',
+      props: ['change']
+
+    }
+    let appContent = {
+      template: `
+        <div>
+          content
+          <button @click="clickMe">click</button>  
+        </div>
+      `,
+      methods: {
+        clickMe: function(){
+          this.$emit('here', 'yahoo~!')
+        }
+      }
+    }
+
+    new Vue ({
+
+      el:'#app',
+      components: {
+        'app-header': appHeader,
+        'app-content': appContent,
+      },
+      data: {
+        msg: 'hello',
+        headerData: 'header'
+      },
+      methods: {
+        msgChange: function(changeValue){
+          this.msg = changeValue
+        }
+      }
+    });
+  
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>component same level</title>
+</head>
+<body>
+  
+  <div id="app">
+    <!-- 
+      같은 위치의 엘리먼트 끼리 정보를 전달하고 싶다면 상위 엘리먼트를 거쳐 데이터를 전달해야 한다
+      app-content의 버튼을 누르면 app-header의 데이터를 바꾸게 하는 법은
+      app-content에 메소드를 입력해 이벤트 에밋을 만들고 이름과 값을 입력한다.(값을 안 써도 값을 정하는 다른 방법이 있을듯 아니면 함수 입력해서 함수 실행되게도 될듯)
+      content 속 button에 클릭이벤트를 달고 메소드의 함수이름을 선언한다.
+      props를 쓸 거니 app Vue에 data를 적어 내용을 적는다.
+      app-header에 props 데이터를 만들고 app-header에 v-bind를 입력한다.(props이름과 data속에 있는 설정한 함수이름)
+      클릭을 하면 실행될 함수를 만들어야 하니 app Vue에 methods 적고 그 안에 함수를 만든다.
+      함수를 선언할 때 아까 적은 이벤트($emit)의 값을 가져 올 수 있게 function()<- 안에 함수 이름 value를 적는다.(value는 함수 이름이기 때문에 내가 마음대로 정하면 됨)
+      그리고 실행시킬 내용은 this.num을 해서 num의 정보를 불러와 value 값으로 바뀌게 적는다. (this.num = value)
+      app-content에 v-on을 입력한 뒤 이벤트 이름과 메소드 속 실행 될 함수 이름을 적는다.
+      이제 버튼을 클릭하면 상위 객체 Root와 app-header의 num 데이터가 이벤트($emit)에 설정한 값으로 바뀌게 된다.
+
+      헷갈리는 부분
+      props -> v-bind 데이터는  (데이터 바인딩 생각하자)
+      methods -> v-on 이벤트는 on (클릭 온 이벤트 생각하자)
+    -->
+    <app-header v-bind:pros_data="num"></app-header>
+    <app-content v-on:pass="deliverNum"></app-content>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- 뷰 쓸 거면 이거 꼭 붙여야 함 -->
+  <script>
+    let appHeader = {
+      template: '<div>header</div>',
+      props: ['pros_data'],
+    }
+    let appContent = {
+      template: `
+      <div>
+        content
+        <button @click="passNum">pass</button>
+      </div>`,
+      methods: {
+        passNum: function(){
+          this.$emit('pass',10);
+        }
+      }
+    }
+    new Vue ({
+      el: '#app',
+      components: {
+        'app-header': appHeader,
+        'app-content': appContent
+      },
+      data: {
+        num: 0
+      },
+      methods: {
+        deliverNum: function(value){
+          this.num = value;
+        }
+      },
+    });
+  </script>
+  
+</body>
+</html>
