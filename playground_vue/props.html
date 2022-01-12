@@ -22,8 +22,9 @@
     }
     let appContent = {
       template: '<div>{{ propsdata }}</div>',
-      props: ['propsdata']
+      props: ['propsdata'] //'' <- 안에 넣어야 하고 소문자로만 적어야 함 숫자나 _ (언더 바) 는 넣어도 됨
     }
+
     new Vue({
       el: '#app',
       components: {

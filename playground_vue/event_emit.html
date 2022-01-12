@@ -28,7 +28,7 @@
       template: '<button v-on:click="addNumber">add</button>',
       methods: {
         addNumber: function(){
-          this.$emit('increase');
+          this.$emit('increase'); // 에밋 이름은 또한 대문자가 들어가면 안 됨 숫자나 _(언더바)는 됨
         }
       }
     }
