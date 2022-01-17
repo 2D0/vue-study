@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>router</title>
+</head>
+<body>
+  <div id="app">
+    <div>
+      <!-- router-link는 링크를 연결해 주는 속성이다. to="" <- 는 a태그의 href의 역할이다. -->
+      <router-link to="/login">Login</router-link>
+      <router-link to="/main">Main</router-link>
+    </div>
+    <!-- router-view는 view 인스턴트에 router 인스턴트를 연결해야지만 사용할 수 있다. -->
+    <!-- url이 변경됐을 때 url에 따라서 특정 컴포넌트가 뿌려지는 영역 LoginComponent 또는 MainComponent-->
+    <router-view></router-view>
+  </div>
+
+  <!-- 뷰 js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- 뷰 쓸 거면 이거 꼭 붙여야 함 -->
+  <!-- 라우터 js -->
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> <!-- 라우터 js 뷰 스크립트 다음에 넣어야함 -->
+  <script>
+    let LoginComponent = {
+      template: '<div>login</div>'
+    }
+    let MainComponent = {
+      template: '<div>main</div>'
+    }
+
+    let router = new VueRouter({
+       // mode에 history를 넣으면 주소에 해시(#)가 사라지면서 더 깔끔한 주소를 만들 수 있다.
+      //mode: 'history',
+      
+      // routes : 페이지의 라우팅 정보가 들어감
+      // 라우터는 배열로 담기게 되고 페이지 갯수만큼 그안에 객체를 만들어줘야 함.
+      routes: [
+        //로그인 페이지 정보
+        {
+          // 페이지의 url
+          path: '/login',
+          // 해당 url에서 표시될 컴포넌트 해당 페이지마다 뿌려질 컴포넌트는 무조건 하나라 component 뒤에 s를 붙이지 않는다.
+          component:LoginComponent
+        },
+
+        // 메인 페이지 정보
+        {
+          path: '/main',
+          component: MainComponent
+        }
+      ]
+    });
+
+    new Vue ({
+      el: '#app',
+      // router는 뷰에 있는 기본 속성 이름이다. 속성 뒤에 적은 건 변수 이름이니 헷갈리지 말자 ex router(뷰 기본속성) : router(내가 임의로 정한 이름)
+      router: router,
+      components:{}
+    });
+
+  </script>
+</body>
+</html>
+
+<!--
+뷰 라우터
+페이지를 이동할 때 사용하는 뷰 공식 라이브러리이자 기능이다.
+페이지 이동과 관련된 기능을 뷰 라우터로 구현할 수 있다.
+npm 방식으로 설치해서 등록할 수 있다.
+routes: [] 페이지의 정보들이 들어가는 속성
+-->
