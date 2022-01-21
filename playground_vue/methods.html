@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>methods</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="logText">click me</button>
+    <!-- button 태그를 클릭하면 메소드 이름(변수)이 실행된다. -->
+
+    <input type="text" @keyup.enter="logText">
+    <!-- keyup은 input에 글자를 입력할 때마다 이벤트가 실행되고 뒤에 .enter를 입력하면 엔터를 누를 때마다 이벤트가 실행된다.
+      .enter 처럼 추가로 이벤트를 주는 것은 이벤트 모디파이어라고 한다. -->
+      <button @click="logText">add</button>
+  </div>
+
+  <!-- 뷰 js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- 뷰 쓸 거면 이거 꼭 붙여야 함 -->
+
+  <script>
+    new Vue({
+      el: '#app',
+      methods: {
+        logText: function(){
+          console.log('clicked');
+        }
+      },
+    });
+  </script>
+</body>
+</html>

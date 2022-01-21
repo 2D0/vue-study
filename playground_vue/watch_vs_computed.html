@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>watch vs computed</title>
+</head>
+<body>
+  <div id="app">
+    {{ num }}
+  </div>
+  
+  <!-- 뷰 js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- 뷰 쓸 거면 이거 꼭 붙여야 함 -->
+  <script>
+    
+    new Vue ({
+      el: '#app',
+      data: {
+        num: 10
+      },
+      computed: { // 뷰 data 내부적으로 계산을 하는 속성
+        doubleNum:function(){
+          return this.num * 2;
+        }
+      },
+      watch: {
+        num: function(newValue, oldValue){
+          this.fetchUserByNumber(newValue);
+        } // watch는 값의 변화를 계속 추적하고 있기 때문에 이전 값과 갱신된 값을 인자로 받을 수 있다.
+      },
+      methods: {
+        fetchUserByNumber: function(num){
+          console.log(num);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+
+<!-- 
+  computed 와 watch 는 data 값을 변화시킨다.
+
+  computed : 단순한 텍스트의 입력을 받아서 값을 계산하는 것에 많이 사용 - 간단한 계산이나 텍스트 변화에 대한 것에 대해 적합
+  watch : 무거운 로직을 써야할 때 사용 (매번 사용하기 부담스러운 코드에 사용) - 데이트 요청에 적합
+
+  웬만하면 computed를 쓰는 게 좋고 watch보다는 computed가 대부분의 케이스에 적합하다.
+-->

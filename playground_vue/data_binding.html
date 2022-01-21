@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>data binding</title>
+</head>
+<body>
+  <!-- v-bind의 약어는 : 이고, v-on의 약어는 @ 이다. -->
+  <div id="app">
+    <p v-bind:id="uuid" v-bind:class="name">{{ num }}</p>
+    <p>{{ doubleNum }}</p>
+    
+    <div v-if="loading"><!-- 유저가 로그인 하기 전에 로딩 상태 -->
+      Loading...
+    </div>
+
+    <div v-else><!-- 유저가 로그인 하면 나타나는 상태표시 -->
+      test user has been logged in
+    </div>
+
+    <div v-show="loading"><!-- v-if는 돔에서 아예 사라지게 하는 거고 v-show는 돔에 상태가 남아있게 한다. -->
+      Loading...
+    </div>
+
+    <!-- TODO : 인풋 박스를 만들고 입력된 값을 p 태그에 출력해 보세요. -->
+    <input type="text" v-model="message" placeholder="on"><!-- v-model을 이용해 인풋 데이터를 동기화 해 정보를 전달할 수 있다. -->
+    <p>메시지 : {{ message }}</p>
+
+  </div>
+
+  <!-- 뷰 js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- 뷰 쓸 거면 이거 꼭 붙여야 함 -->
+  <script>
+
+    new Vue ({
+      el:'#app',
+      data: {
+        num: 10,
+        uuid: 'abc1234',
+        name: 'text-blue',
+        loading: true,
+        message: ''
+      },
+      computed: {
+        doubleNum: function(){
+          return this.num * 2;
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
