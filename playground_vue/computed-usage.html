@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>computed usage</title>
+</head>
+<style>
+  .warning{
+    color:#f00;
+  }
+</style>
+<body>
+  <div id="app">
+    <p v-bind:class="errorTextColor">Hello</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- 뷰 쓸 거면 이거 꼭 붙여야 함 -->
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        //cname: 'blue-text',
+        isError: false
+      },
+      computed: { // computed는 유용한 속성이니 잘 살펴보자. 아래처럼 함수실행을 시켜준다던지 사용.
+        errorTextColor: function(){
+          // ?는 if이고 :는 else이다. 간단한 것들은 삼항연산자로 표현하는 게 깔끔하고 좋다. (늘 쓰는 그 if문을 줄인 것임)
+          return this.isError ? 'warning' : null; 
+        }
+      }
+    })
+  </script>
+</body>
+</html>
